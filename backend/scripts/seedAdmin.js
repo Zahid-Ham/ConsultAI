@@ -33,6 +33,11 @@ async function seedAdmin() {
       process.exit(0);
     }
     
+    // Hash password before saving
+    const salt = await bcrypt.genSalt(12);
+    const hashedPassword = await bcrypt.hash(adminData.password, salt);
+    adminData.password = hashedPassword;
+
     // Create new admin user
     const admin = new User(adminData);
     

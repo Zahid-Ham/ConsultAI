@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { OAuth2Client } = require('google-auth-library');
-const { User } = require('../models');
+const User = require('../models/User');
 
 // Create a new OAuth client
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
@@ -79,9 +79,12 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log('Login attempt:', email);
 
-    // Check if user exists
+    // Find user by lowercase email
     const user = await User.findOne({ email: email.toLowerCase() });
+    console.log('User found:', user ? user.email : 'none');
+
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -91,21 +94,14 @@ const login = async (req, res) => {
 
     // Check password
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log('Password valid:', isPasswordValid);
+
     if (!isPasswordValid) {
       return res.status(401).json({
         success: false,
         message: 'Invalid email or password'
       });
     }
-
-    // Check if doctor is verified
-    if (user.role === 'doctor' && !user.isVerified) {
-      return res.status(403).json({
-        success: false,
-        message: 'Your account is pending verification. Please contact administrator.'
-      });
-    }
-
     // Generate JWT token
     const token = jwt.sign(
       {
