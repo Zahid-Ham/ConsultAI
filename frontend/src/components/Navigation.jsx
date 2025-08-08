@@ -32,52 +32,52 @@ const Navigation = () => {
             Home
           </Link>
           
-          {!isAuthenticated() ? (
-            <>
-              <Link 
-                to="/login" 
-                className={`nav-link ${isActive('/login') ? 'active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Login
-              </Link>
-              <Link 
-                to="/register" 
-                className={`nav-link ${isActive('/register') ? 'active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Register
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link 
-                to="/dashboard" 
-                className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Dashboard
-              </Link>
-              {isAdmin() && (
-                <Link 
-                  to="/admin" 
-                  className={`nav-link ${isActive('/admin') ? 'active' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Admin
-                </Link>
-              )}
-              <div className="nav-user">
-                <span className="user-name">Welcome, {user?.name}</span>
-                <button 
-                  className="nav-link logout-btn"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            </>
-          )}
+{!isAuthenticated() ? (
+  <>
+    <Link 
+      to="/login" 
+      className={`nav-link ${isActive('/login') ? 'active' : ''}`}
+      onClick={() => setIsMenuOpen(false)}
+    >
+      Login
+    </Link>
+    <Link 
+      to="/register" 
+      className={`nav-link ${isActive('/register') ? 'active' : ''}`}
+      onClick={() => setIsMenuOpen(false)}
+    >
+      Register
+    </Link>
+  </>
+) : (
+  <>
+    <Link 
+      to="/dashboard" 
+      className={`nav-link ${isActive('/dashboard') ? 'active' : ''}`}
+      onClick={() => setIsMenuOpen(false)}
+    >
+      Dashboard
+    </Link>
+    {isAdmin() && (
+      <Link 
+        to="/admin" 
+        className={`nav-link ${isActive('/admin') ? 'active' : ''}`}
+        onClick={() => setIsMenuOpen(false)}
+      >
+        Admin
+      </Link>
+    )}
+    <div className="nav-user">
+      <span className="user-name">Welcome, {user?.name}</span>
+      <button 
+        className="nav-link logout-btn"
+        onClick={handleLogout}
+      >
+        Logout
+      </button>
+    </div>
+  </>
+)}
         </div>
 
         <div 

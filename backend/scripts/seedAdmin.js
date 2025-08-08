@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 require('dotenv').config();
 
 // Import User model
@@ -17,7 +16,7 @@ mongoose.connect(process.env.MONGODB_URI)
 const adminData = {
   name: 'Admin User',
   email: 'admin@consultai.com',
-  password: 'admin123',  // This will be hashed before saving
+  password: 'admin123',  // Plain password, will be hashed by model
   role: 'admin',
   isVerified: true
 };
@@ -33,11 +32,7 @@ async function seedAdmin() {
       process.exit(0);
     }
     
-    // Hash password before saving
-    const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash(adminData.password, salt);
-    adminData.password = hashedPassword;
-
+    // Do NOT hash password here!
     // Create new admin user
     const admin = new User(adminData);
     

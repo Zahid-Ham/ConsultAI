@@ -51,14 +51,11 @@ async function seedTestUsers() {
       }
       
       // Hash password
-      const salt = await bcrypt.genSalt(12);
-      const hashedPassword = await bcrypt.hash(userData.password, salt);
+      // const salt = await bcrypt.genSalt(12);
+      // const hashedPassword = await bcrypt.hash(userData.password, salt);
       
       // Create new user with hashed password
-      const user = new User({
-        ...userData,
-        password: hashedPassword
-      });
+      const user = new User(userData);
       
       // Save user to database
       await user.save();

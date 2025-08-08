@@ -5,6 +5,49 @@
   box-sizing: border-box;
 }
 
+/* Add to App.css or Home-specific CSS */
+.welcome-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border-radius: 15px;
+  padding: 3rem;
+  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.15);
+  margin-bottom: 2rem;
+}
+
+.welcome-user {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #fff;
+  margin-right: 1rem;
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.feature {
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  border-left: 4px solid #667eea;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+  transition: box-shadow 0.3s;
+}
+
+.feature:hover {
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.18);
+}
+
+.feature h3 {
+  color: #667eea;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
 /* Dashboard Styles */
 .dashboard-container {
   max-width: 1200px;

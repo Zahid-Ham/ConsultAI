@@ -21,14 +21,14 @@ const register = async (req, res) => {
     }
 
     // Hash password
-    const salt = await bcrypt.genSalt(12);
-    const hashedPassword = await bcrypt.hash(password, salt);
+    // const salt = await bcrypt.genSalt(12);
+    // const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user object
     const userData = {
       name,
       email: email.toLowerCase(),
-      password: hashedPassword,
+      password,
       role: role || 'patient',
       isVerified: role === 'doctor' ? false : true // Set isVerified to false for doctors
     };
